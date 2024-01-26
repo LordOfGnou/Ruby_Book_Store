@@ -8,4 +8,25 @@ class BooksController < ApplicationController
       @book = Book.find(params[:id])
       render json: { "data": @book }, include: [:authors, :categories]
    end
+
+   def add_book
+      if api_user_signed_in?
+         Book.create [
+            {
+               title: params[:book][:title],
+               year: params[:book][:year]
+            }
+         ]
+         render json: { "data": "done" }
+      else
+         render json: { "data": "Not logged in" }
+      end
+   end
+
+   def delete_by_id
+      if api_user_signed_in?
+         Book.delete(params[:id])
+         render json: { "data": "book number #{params[:id]} deleted" }
+      end
+   end
 end
