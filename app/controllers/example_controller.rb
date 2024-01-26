@@ -6,4 +6,8 @@ class ExampleController < ApplicationController
          render json: { "data": { "test": "KO" } }
       end
    end
+
+   def rick_roll
+      render json: { "link": "https://youtu.be/dQw4w9WgXcQ" }
+   end
 end
